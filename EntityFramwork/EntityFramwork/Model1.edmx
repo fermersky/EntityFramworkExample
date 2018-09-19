@@ -1,0 +1,582 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PublishingHouseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Authors">
+          <Key>
+            <PropertyRef Name="ID_Author" />
+          </Key>
+          <Property Name="ID_Author" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="20" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="20" />
+          <Property Name="ID_Country" Type="int" />
+        </EntityType>
+        <EntityType Name="Books">
+          <Key>
+            <PropertyRef Name="ID_Book" />
+          </Key>
+          <Property Name="ID_Book" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameBook" Type="nvarchar" MaxLength="40" />
+          <Property Name="ID_Theme" Type="int" />
+          <Property Name="ID_Author" Type="int" />
+          <Property Name="Price" Type="money" />
+          <Property Name="DrawingOfBook" Type="int" />
+          <Property Name="DateOfPublish" Type="date" />
+          <Property Name="Pages" Type="int" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Themes">
+          <Key>
+            <PropertyRef Name="ID_Theme" />
+          </Key>
+          <Property Name="ID_Theme" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameTheme" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Audit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Book" Type="int" />
+          <Property Name="Row" Type="nvarchar" MaxLength="50" />
+          <Property Name="oldvalue" Type="nvarchar" MaxLength="20" />
+          <Property Name="newvalue" Type="nvarchar" MaxLength="20" />
+          <Property Name="ModificationTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="ID_Country" />
+          </Key>
+          <Property Name="ID_Country" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameCountry" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="DeletedBooks">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Book" Type="int" />
+          <Property Name="Operation" Type="nvarchar" MaxLength="50" />
+          <Property Name="NameBook" Type="nvarchar" MaxLength="20" />
+          <Property Name="ModificationTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ShopAuthors">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstNane" Type="nvarchar" MaxLength="20" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="20" />
+          <Property Name="ShopName" Type="nvarchar" MaxLength="20" />
+          <Property Name="Country" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="TempXMLBook">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dat" Type="xml" />
+        </EntityType>
+        <EntityType Name="Sales">
+          <Key>
+            <PropertyRef Name="ID_Sale" />
+          </Key>
+          <Property Name="ID_Sale" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Book" Type="int" />
+          <Property Name="DateOfSale" Type="date" />
+          <Property Name="Price" Type="money" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="ID_Shop" Type="int" />
+        </EntityType>
+        <EntityType Name="Shops">
+          <Key>
+            <PropertyRef Name="ID_Shop" />
+          </Key>
+          <Property Name="ID_Shop" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameShop" Type="nvarchar" MaxLength="20" />
+          <Property Name="ID_Country" Type="int" />
+        </EntityType>
+        <Association Name="FK__Authors__ID_Coun__145C0A3F">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Authors" Type="Self.Authors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="ID_Country" />
+            </Principal>
+            <Dependent Role="Authors">
+              <PropertyRef Name="ID_Country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Books__ID_Author__182C9B23">
+          <End Role="Authors" Type="Self.Authors" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Books" Type="Self.Books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Authors">
+              <PropertyRef Name="ID_Author" />
+            </Principal>
+            <Dependent Role="Books">
+              <PropertyRef Name="ID_Author" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Books__ID_Theme__173876EA">
+          <End Role="Themes" Type="Self.Themes" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Books" Type="Self.Books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Themes">
+              <PropertyRef Name="ID_Theme" />
+            </Principal>
+            <Dependent Role="Books">
+              <PropertyRef Name="ID_Theme" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sales__ID_Book__1DE57479">
+          <End Role="Books" Type="Self.Books" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Books">
+              <PropertyRef Name="ID_Book" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="ID_Book" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sales__ID_Shop__1ED998B2">
+          <End Role="Shops" Type="Self.Shops" Multiplicity="0..1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shops">
+              <PropertyRef Name="ID_Shop" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="ID_Shop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shops__ID_Countr__1B0907CE">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Shops" Type="Self.Shops" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="ID_Country" />
+            </Principal>
+            <Dependent Role="Shops">
+              <PropertyRef Name="ID_Country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PublishingHouseModelStoreContainer">
+          <EntitySet Name="Authors" EntityType="Self.Authors" Schema="book" store:Type="Tables" />
+          <EntitySet Name="Books" EntityType="Self.Books" Schema="book" store:Type="Tables" />
+          <EntitySet Name="Themes" EntityType="Self.Themes" Schema="book" store:Type="Tables" />
+          <EntitySet Name="Audit" EntityType="Self.Audit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeletedBooks" EntityType="Self.DeletedBooks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShopAuthors" EntityType="Self.ShopAuthors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TempXMLBook" EntityType="Self.TempXMLBook" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sales" EntityType="Self.Sales" Schema="sale" store:Type="Tables" />
+          <EntitySet Name="Shops" EntityType="Self.Shops" Schema="sale" store:Type="Tables" />
+          <AssociationSet Name="FK__Authors__ID_Coun__145C0A3F" Association="Self.FK__Authors__ID_Coun__145C0A3F">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Authors" EntitySet="Authors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Books__ID_Author__182C9B23" Association="Self.FK__Books__ID_Author__182C9B23">
+            <End Role="Authors" EntitySet="Authors" />
+            <End Role="Books" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Books__ID_Theme__173876EA" Association="Self.FK__Books__ID_Theme__173876EA">
+            <End Role="Themes" EntitySet="Themes" />
+            <End Role="Books" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sales__ID_Book__1DE57479" Association="Self.FK__Sales__ID_Book__1DE57479">
+            <End Role="Books" EntitySet="Books" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sales__ID_Shop__1ED998B2" Association="Self.FK__Sales__ID_Shop__1ED998B2">
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shops__ID_Countr__1B0907CE" Association="Self.FK__Shops__ID_Countr__1B0907CE">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Shops" EntitySet="Shops" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PublishingHouseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Authors">
+          <Key>
+            <PropertyRef Name="ID_Author" />
+          </Key>
+          <Property Name="ID_Author" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Country" Type="Int32" />
+          <NavigationProperty Name="Country" Relationship="Self.FK__Authors__ID_Coun__145C0A3F" FromRole="Authors" ToRole="Country" />
+          <NavigationProperty Name="Books" Relationship="Self.FK__Books__ID_Author__182C9B23" FromRole="Authors" ToRole="Books" />
+        </EntityType>
+        <EntityType Name="Books">
+          <Key>
+            <PropertyRef Name="ID_Book" />
+          </Key>
+          <Property Name="ID_Book" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameBook" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Theme" Type="Int32" />
+          <Property Name="ID_Author" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DrawingOfBook" Type="Int32" />
+          <Property Name="DateOfPublish" Type="DateTime" Precision="0" />
+          <Property Name="Pages" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Authors" Relationship="Self.FK__Books__ID_Author__182C9B23" FromRole="Books" ToRole="Authors" />
+          <NavigationProperty Name="Themes" Relationship="Self.FK__Books__ID_Theme__173876EA" FromRole="Books" ToRole="Themes" />
+          <NavigationProperty Name="Sales" Relationship="Self.FK__Sales__ID_Book__1DE57479" FromRole="Books" ToRole="Sales" />
+        </EntityType>
+        <EntityType Name="Themes">
+          <Key>
+            <PropertyRef Name="ID_Theme" />
+          </Key>
+          <Property Name="ID_Theme" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameTheme" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Books" Relationship="Self.FK__Books__ID_Theme__173876EA" FromRole="Themes" ToRole="Books" />
+        </EntityType>
+        <EntityType Name="Audit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Book" Type="Int32" />
+          <Property Name="Row" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="oldvalue" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="newvalue" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ModificationTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="ID_Country" />
+          </Key>
+          <Property Name="ID_Country" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameCountry" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Authors" Relationship="Self.FK__Authors__ID_Coun__145C0A3F" FromRole="Country" ToRole="Authors" />
+          <NavigationProperty Name="Shops" Relationship="Self.FK__Shops__ID_Countr__1B0907CE" FromRole="Country" ToRole="Shops" />
+        </EntityType>
+        <EntityType Name="DeletedBooks">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Book" Type="Int32" />
+          <Property Name="Operation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NameBook" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ModificationTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ShopAuthors">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstNane" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ShopName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TempXMLBook">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dat" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Sales">
+          <Key>
+            <PropertyRef Name="ID_Sale" />
+          </Key>
+          <Property Name="ID_Sale" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Book" Type="Int32" />
+          <Property Name="DateOfSale" Type="DateTime" Precision="0" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="ID_Shop" Type="Int32" />
+          <NavigationProperty Name="Books" Relationship="Self.FK__Sales__ID_Book__1DE57479" FromRole="Sales" ToRole="Books" />
+          <NavigationProperty Name="Shops" Relationship="Self.FK__Sales__ID_Shop__1ED998B2" FromRole="Sales" ToRole="Shops" />
+        </EntityType>
+        <EntityType Name="Shops">
+          <Key>
+            <PropertyRef Name="ID_Shop" />
+          </Key>
+          <Property Name="ID_Shop" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameShop" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Country" Type="Int32" />
+          <NavigationProperty Name="Country" Relationship="Self.FK__Shops__ID_Countr__1B0907CE" FromRole="Shops" ToRole="Country" />
+          <NavigationProperty Name="Sales" Relationship="Self.FK__Sales__ID_Shop__1ED998B2" FromRole="Shops" ToRole="Sales" />
+        </EntityType>
+        <Association Name="FK__Authors__ID_Coun__145C0A3F">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Authors" Type="Self.Authors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="ID_Country" />
+            </Principal>
+            <Dependent Role="Authors">
+              <PropertyRef Name="ID_Country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Books__ID_Author__182C9B23">
+          <End Role="Authors" Type="Self.Authors" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Books" Type="Self.Books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Authors">
+              <PropertyRef Name="ID_Author" />
+            </Principal>
+            <Dependent Role="Books">
+              <PropertyRef Name="ID_Author" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Books__ID_Theme__173876EA">
+          <End Role="Themes" Type="Self.Themes" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Books" Type="Self.Books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Themes">
+              <PropertyRef Name="ID_Theme" />
+            </Principal>
+            <Dependent Role="Books">
+              <PropertyRef Name="ID_Theme" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sales__ID_Book__1DE57479">
+          <End Role="Books" Type="Self.Books" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Books">
+              <PropertyRef Name="ID_Book" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="ID_Book" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shops__ID_Countr__1B0907CE">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Shops" Type="Self.Shops" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="ID_Country" />
+            </Principal>
+            <Dependent Role="Shops">
+              <PropertyRef Name="ID_Country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sales__ID_Shop__1ED998B2">
+          <End Role="Shops" Type="Self.Shops" Multiplicity="0..1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shops">
+              <PropertyRef Name="ID_Shop" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="ID_Shop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PublishingHouseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Authors" EntityType="Self.Authors" />
+          <EntitySet Name="Books" EntityType="Self.Books" />
+          <EntitySet Name="Themes" EntityType="Self.Themes" />
+          <EntitySet Name="Audit" EntityType="Self.Audit" />
+          <EntitySet Name="Country" EntityType="Self.Country" />
+          <EntitySet Name="DeletedBooks" EntityType="Self.DeletedBooks" />
+          <EntitySet Name="ShopAuthors" EntityType="Self.ShopAuthors" />
+          <EntitySet Name="TempXMLBook" EntityType="Self.TempXMLBook" />
+          <EntitySet Name="Sales" EntityType="Self.Sales" />
+          <EntitySet Name="Shops" EntityType="Self.Shops" />
+          <AssociationSet Name="FK__Authors__ID_Coun__145C0A3F" Association="Self.FK__Authors__ID_Coun__145C0A3F">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Authors" EntitySet="Authors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Books__ID_Author__182C9B23" Association="Self.FK__Books__ID_Author__182C9B23">
+            <End Role="Authors" EntitySet="Authors" />
+            <End Role="Books" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Books__ID_Theme__173876EA" Association="Self.FK__Books__ID_Theme__173876EA">
+            <End Role="Themes" EntitySet="Themes" />
+            <End Role="Books" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sales__ID_Book__1DE57479" Association="Self.FK__Sales__ID_Book__1DE57479">
+            <End Role="Books" EntitySet="Books" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shops__ID_Countr__1B0907CE" Association="Self.FK__Shops__ID_Countr__1B0907CE">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Shops" EntitySet="Shops" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sales__ID_Shop__1ED998B2" Association="Self.FK__Sales__ID_Shop__1ED998B2">
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PublishingHouseModelStoreContainer" CdmEntityContainer="PublishingHouseEntities">
+          <EntitySetMapping Name="Authors">
+            <EntityTypeMapping TypeName="PublishingHouseModel.Authors">
+              <MappingFragment StoreEntitySet="Authors">
+                <ScalarProperty Name="ID_Author" ColumnName="ID_Author" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="ID_Country" ColumnName="ID_Country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="PublishingHouseModel.Books">
+              <MappingFragment StoreEntitySet="Books">
+                <ScalarProperty Name="ID_Book" ColumnName="ID_Book" />
+                <ScalarProperty Name="NameBook" ColumnName="NameBook" />
+                <ScalarProperty Name="ID_Theme" ColumnName="ID_Theme" />
+                <ScalarProperty Name="ID_Author" ColumnName="ID_Author" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="DrawingOfBook" ColumnName="DrawingOfBook" />
+                <ScalarProperty Name="DateOfPublish" ColumnName="DateOfPublish" />
+                <ScalarProperty Name="Pages" ColumnName="Pages" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Themes">
+            <EntityTypeMapping TypeName="PublishingHouseModel.Themes">
+              <MappingFragment StoreEntitySet="Themes">
+                <ScalarProperty Name="ID_Theme" ColumnName="ID_Theme" />
+                <ScalarProperty Name="NameTheme" ColumnName="NameTheme" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Audit">
+            <EntityTypeMapping TypeName="PublishingHouseModel.Audit">
+              <MappingFragment StoreEntitySet="Audit">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_Book" ColumnName="ID_Book" />
+                <ScalarProperty Name="Row" ColumnName="Row" />
+                <ScalarProperty Name="oldvalue" ColumnName="oldvalue" />
+                <ScalarProperty Name="newvalue" ColumnName="newvalue" />
+                <ScalarProperty Name="ModificationTime" ColumnName="ModificationTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Country">
+            <EntityTypeMapping TypeName="PublishingHouseModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="ID_Country" ColumnName="ID_Country" />
+                <ScalarProperty Name="NameCountry" ColumnName="NameCountry" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeletedBooks">
+            <EntityTypeMapping TypeName="PublishingHouseModel.DeletedBooks">
+              <MappingFragment StoreEntitySet="DeletedBooks">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_Book" ColumnName="ID_Book" />
+                <ScalarProperty Name="Operation" ColumnName="Operation" />
+                <ScalarProperty Name="NameBook" ColumnName="NameBook" />
+                <ScalarProperty Name="ModificationTime" ColumnName="ModificationTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShopAuthors">
+            <EntityTypeMapping TypeName="PublishingHouseModel.ShopAuthors">
+              <MappingFragment StoreEntitySet="ShopAuthors">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstNane" ColumnName="FirstNane" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="ShopName" ColumnName="ShopName" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TempXMLBook">
+            <EntityTypeMapping TypeName="PublishingHouseModel.TempXMLBook">
+              <MappingFragment StoreEntitySet="TempXMLBook">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="dat" ColumnName="dat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales">
+            <EntityTypeMapping TypeName="PublishingHouseModel.Sales">
+              <MappingFragment StoreEntitySet="Sales">
+                <ScalarProperty Name="ID_Sale" ColumnName="ID_Sale" />
+                <ScalarProperty Name="ID_Book" ColumnName="ID_Book" />
+                <ScalarProperty Name="DateOfSale" ColumnName="DateOfSale" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ID_Shop" ColumnName="ID_Shop" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shops">
+            <EntityTypeMapping TypeName="PublishingHouseModel.Shops">
+              <MappingFragment StoreEntitySet="Shops">
+                <ScalarProperty Name="ID_Shop" ColumnName="ID_Shop" />
+                <ScalarProperty Name="NameShop" ColumnName="NameShop" />
+                <ScalarProperty Name="ID_Country" ColumnName="ID_Country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

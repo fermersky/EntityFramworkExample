@@ -1,0 +1,13 @@
+C:\Users\PKO\Desktop\EntityFramwork\EntityFramwork\bin\Debug\EntityFramwork.exe.config
+C:\Users\PKO\Desktop\EntityFramwork\EntityFramwork\bin\Debug\EntityFramwork.exe
+C:\Users\PKO\Desktop\EntityFramwork\EntityFramwork\bin\Debug\EntityFramwork.pdb
+C:\Users\PKO\Desktop\EntityFramwork\EntityFramwork\bin\Debug\EntityFramework.dll
+C:\Users\PKO\Desktop\EntityFramwork\EntityFramwork\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\PKO\Desktop\EntityFramwork\EntityFramwork\bin\Debug\EntityFramework.xml
+C:\Users\PKO\Desktop\EntityFramwork\EntityFramwork\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\PKO\Desktop\EntityFramwork\EntityFramwork\obj\Debug\EntityFramwork.csprojResolveAssemblyReference.cache
+C:\Users\PKO\Desktop\EntityFramwork\EntityFramwork\obj\Debug\EntityFramwork.Form1.resources
+C:\Users\PKO\Desktop\EntityFramwork\EntityFramwork\obj\Debug\EntityFramwork.Properties.Resources.resources
+C:\Users\PKO\Desktop\EntityFramwork\EntityFramwork\obj\Debug\EntityFramwork.csproj.GenerateResource.Cache
+C:\Users\PKO\Desktop\EntityFramwork\EntityFramwork\obj\Debug\EntityFramwork.exe
+C:\Users\PKO\Desktop\EntityFramwork\EntityFramwork\obj\Debug\EntityFramwork.pdb
