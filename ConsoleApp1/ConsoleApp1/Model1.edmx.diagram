@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="373781d173a74f4cb7a7f5262873fc19" Name="Diagram1">
+        <EntityTypeShape EntityType="PublishingHouseModel.Authors" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PublishingHouseModel.Books" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PublishingHouseModel.Themes" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="PublishingHouseModel.Audit" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PublishingHouseModel.Country" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PublishingHouseModel.DeletedBooks" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PublishingHouseModel.ShopAuthors" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PublishingHouseModel.TempXMLBook" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PublishingHouseModel.Sales" Width="1.5" PointX="7.5" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PublishingHouseModel.Shops" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <AssociationConnector Association="PublishingHouseModel.FK__Authors__ID_Coun__145C0A3F" ManuallyRouted="false" />
+        <AssociationConnector Association="PublishingHouseModel.FK__Books__ID_Author__182C9B23" ManuallyRouted="false" />
+        <AssociationConnector Association="PublishingHouseModel.FK__Books__ID_Theme__173876EA" ManuallyRouted="false" />
+        <AssociationConnector Association="PublishingHouseModel.FK__Sales__ID_Book__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="PublishingHouseModel.FK__Shops__ID_Countr__1B0907CE" ManuallyRouted="false" />
+        <AssociationConnector Association="PublishingHouseModel.FK__Sales__ID_Shop__1ED998B2" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

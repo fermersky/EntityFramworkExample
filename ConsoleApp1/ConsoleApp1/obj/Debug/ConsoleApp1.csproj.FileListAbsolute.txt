@@ -1,0 +1,10 @@
+C:\Users\PKO\Desktop\ConsoleApp1\ConsoleApp1\bin\Debug\ConsoleApp1.exe.config
+C:\Users\PKO\Desktop\ConsoleApp1\ConsoleApp1\bin\Debug\ConsoleApp1.exe
+C:\Users\PKO\Desktop\ConsoleApp1\ConsoleApp1\bin\Debug\ConsoleApp1.pdb
+C:\Users\PKO\Desktop\ConsoleApp1\ConsoleApp1\bin\Debug\EntityFramework.dll
+C:\Users\PKO\Desktop\ConsoleApp1\ConsoleApp1\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\PKO\Desktop\ConsoleApp1\ConsoleApp1\bin\Debug\EntityFramework.xml
+C:\Users\PKO\Desktop\ConsoleApp1\ConsoleApp1\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\PKO\Desktop\ConsoleApp1\ConsoleApp1\obj\Debug\ConsoleApp1.csprojResolveAssemblyReference.cache
+C:\Users\PKO\Desktop\ConsoleApp1\ConsoleApp1\obj\Debug\ConsoleApp1.exe
+C:\Users\PKO\Desktop\ConsoleApp1\ConsoleApp1\obj\Debug\ConsoleApp1.pdb
